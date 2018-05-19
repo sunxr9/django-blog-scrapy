@@ -179,7 +179,7 @@ def suggest_view(request):
             new_record.save()
             try:
                 # 使用celery并发处理邮件发送的任务
-                celery_send_email.delay('访客意见', suggest_data, 'tomming233@sina.com', ['tomming233@163.com'])
+                celery_send_email.delay('访客意见', suggest_data, 'sunxiaoran9@163.com', ['sunxiaoran9@163.com'])
             except Exception as e:
                 logger.error("邮件发送失败: {}".format(e))
             return redirect('app:thanks')

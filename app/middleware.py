@@ -3,6 +3,7 @@ from django.conf import settings
 from django.db import connection
 
 
+
 class ShowSqlMiddleware(MiddlewareMixin):
     """打印出每次的数据库操作"""
     def process_response(self, request, response):

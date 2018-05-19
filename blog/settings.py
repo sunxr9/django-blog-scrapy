@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 
 import os
 import sys
+import djcelery
+djcelery.setup_loader()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -29,7 +31,7 @@ SECRET_KEY = 'a3cpe728he(81t@%#qsir@)p_dwm0j*t-bni@ad#60t255c0=u'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # cache settings
 CACHES = {
@@ -55,6 +57,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'app.apps.AppConfig',
     'bootstrap3',
+    'djcelery',
 ]
 
 MIDDLEWARE = [
@@ -66,7 +69,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     # add at the last position
-    'app.middleware.ShowSqlMiddleware',
+    # 'app.middleware.ShowSqlMiddleware',
 ]
 
 ROOT_URLCONF = 'blog.urls'
@@ -110,10 +113,10 @@ WSGI_APPLICATION = 'blog.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'blog',
+        'NAME': 'djangoblog',
         'USER': 'root',
-        'PASSWORD': '123',
-        'HOST': '127.0.0.1',
+        'PASSWORD': 'sunxr1996',
+        'HOST': '47.100.185.114',
         'PORT': '3306',
         'OPTIONS': {
             'sql_mode': 'traditional',
@@ -172,9 +175,10 @@ BOOTSTRAP3 = {
 
 # email
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = "smtp.sina.com"
-EMAIL_HOST_PASSWORD = 'hided'
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER = "tomming233@sina.com"
+EMAIL_HOST = "smtp.163.com"
+EMAIL_HOST_PASSWORD = 'py1703'
+DEFAULT_FROM_EMAIL = 'sunxiaoran9@163.com'
+EMAIL_HOST_USER = "sunxiaoran9@163.com"
 EMAIL_PORT = 25
 EMAIL_USE_TLS = True
 
@@ -246,12 +250,13 @@ LOGGING = {
 }
 
 # Celery settings
-CELERY_BROKER_URL = 'redis://localhost:6379/0'
+CELERY_BROKER_URL = 'redis://:sunxr@localhost:6379/0'
 
 #: Only add pickle to this list if your broker is secured
 #: from unwanted access (see userguide/security.html)
 CELERY_ACCEPT_CONTENT = ['json']
-CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+CELERY_RESULT_BACKEND = 'redis://:sunxr@localhost:6379/0'
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_ENABLE_UTC = True
 CELERY_TIMEZONE = TIME_ZONE
+CELERYBETA_SCHEDULER = 'djcelery.schedulers.DataseScheduler'
