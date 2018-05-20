@@ -47,6 +47,7 @@ class Article(models.Model):
     def get_absolute_url(self):
         return reverse('app:detail', kwargs={'article_id': self.pk})
 
+
 class Category(models.Model):
     """
     另外一个表,储存文章的分类信息
